@@ -1,0 +1,14 @@
+# Módulos de Node.js (generados por `npm install`)
+/node_modules
+
+# Archivos log
+*.log
+
+# Directorio de archivos de compilación
+/build
+
+# Archivos de configuración de IDE
+.idea/
+.vscode/
+
+# Dependiendo de tu editor y preferencias, puedes agregar más archivos y directorios aquí.
