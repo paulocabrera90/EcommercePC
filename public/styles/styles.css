@@ -1,0 +1,33 @@
+.product-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px; /* Añadir margen entre las tarjetas */
+  width: calc(25% - 20px); /* Hacer que todas las tarjetas tengan el mismo ancho (25% del contenedor - margen) */
+  float: left; /* Alinear las tarjetas en una fila */
+  box-sizing: border-box; /* Incluir el padding y el borde en el ancho total de la tarjeta */
+  height: 300px; /* Establecer una altura fija para todas las tarjetas */
+  overflow: hidden; /* Ocultar el contenido que sobresalga de la tarjeta */
+}
+
+.product-container {
+  margin: 15%;
+}
+
+.product-image {
+  width: 50%;
+  height: 50%;
+  border-radius: 5px;
+}
+
+.product-title {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.product-price,
+.product-description,
+.product-category,
+.product-rating {
+  margin-bottom: 5px;
+}

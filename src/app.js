@@ -1,18 +1,24 @@
 const express = require('express')
+
 const globalConstants = require('./const/globalConst')
 const routerConfig = require('./routes/index.routes')
-const router = require('./routes/products.routes');
+const join = globalConstants.JOIN;
+const dirname = globalConstants.DIRNAME;
 
 const configurationApi= (app) => {
     app.use(express.json())
     app.use(express.urlencoded({extended: true}))
+    app.use(express.static('public'));
+
+    app.set('views', join(dirname, 'views'));
+    app.set('view engine', 'pug');
 }
 
 const configurationRoute= (app) => {
     app.use('/api',routerConfig.routes_init())
 }
 
-async function init ()  {
+function init ()  {
     const app = express()
 
     configurationApi(app)    
