@@ -6,13 +6,26 @@ html(lang="en")
     title Productos
     link(rel="stylesheet", href="/styles/styles.css")
   body
+
+    //- Formulario de filtro por categoría
+    .categories-container
+         form(action="/filtrar-productos", method="GET")
+            label(for="categoria") Filtrar por categoría:
+            select(name="categoria", id="categoria")
+                option(value="") Todas las categorías
+                each categoria in categories
+                    option(value=categoria)= categoria
+            button(type="submit") Filtrar
+
     .product-container
         each product in products
             .product-card 
-                img(src=product.image, alt=product.title, class="product-image") 
-                .product-info 
-                h2.product-title= product.title 
-                p.product-price Price: #{product.price}
-                p.product-description Description: #{product.description} 
-                p.product-category Category: #{product.category} 
-                p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ratings) 
+                .product-card-container
+                    .product-card-container-image
+                        img(src=product.image, alt=product.title, class="product-card-container-image") 
+                    .product-card-container-info 
+                        h2.product-title= product.title 
+                        p.product-price Precio: #{product.price}
+                        p.product-description Descripcion: #{product.description} 
+                        p.product-category Categoria: #{product.category} 
+                        p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ratings) 

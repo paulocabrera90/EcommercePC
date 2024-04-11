@@ -6,15 +6,18 @@
   width: calc(25% - 20px); /* Hacer que todas las tarjetas tengan el mismo ancho (25% del contenedor - margen) */
   float: left; /* Alinear las tarjetas en una fila */
   box-sizing: border-box; /* Incluir el padding y el borde en el ancho total de la tarjeta */
-  height: 300px; /* Establecer una altura fija para todas las tarjetas */
+  height: 500px; /* Establecer una altura fija para todas las tarjetas */
   overflow: hidden; /* Ocultar el contenido que sobresalga de la tarjeta */
 }
 
 .product-container {
-  margin: 15%;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: auto;
 }
 
-.product-image {
+.product-card-container-image {
   width: 50%;
   height: 50%;
   border-radius: 5px;
