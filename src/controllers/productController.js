@@ -1,14 +1,16 @@
 const axios = require('axios');
 const globalConstants = require('../const/globalConst');
 const traslate = require('../utils/traslate');
-const URI_PRODUCTS = 'products';
-const URI_CATEGORIES = 'categories';
-//const productsResponse = {};
+const { getProducts, getCategories } = require('../services/productService');
+
+let productsResponse;
+let categoriesResponse;
 
 async function findAll() {
     try{
-        const productsResponse = await axios.get(globalConstants.APIURL+URI_PRODUCTS);
-        const products = await traslate.translateAllProducts(productsResponse.data);
+        productsResponse = await getProducts();
+        categoriesResponse = await getCategories();
+        const products = await traslate.translateAllProducts(productsResponse);
      
         return products;
 
@@ -18,9 +20,8 @@ async function findAll() {
 }
 
 async function findById(id) {
-    try{
-        const response = await axios.get(globalConstants.APIURL+URI_PRODUCTS+'/'+id);        
-        return response.data;
+    try{              
+        return id;
     } catch (error) {
       throw error;
     }
@@ -29,21 +30,24 @@ async function findById(id) {
 async function findAllCategories() {
     
     try{
-        const response = await axios.get(globalConstants.APIURL+URI_PRODUCTS+'/'+URI_CATEGORIES); 
-        const categories = await traslate.translateCategories(response.data);
+        const categories = await traslate.translateCategories(categoriesResponse);
         return categories;
+
     } catch (error) {
       throw error;
     }
 }
 
 async function filterByCategory(categoryRequest) {
-    const language = 'en';
     try{
-        console.log("CATEGORIA NO TRADUCIDA", categoryRequest);
-        const category = await traslate.translateText(categoryRequest, language);
-        console.log("CATEGORIA TRADUCIDA", category);
-        return category;
+        productsResponse = await getProducts();
+        console.log("Category filter", categoryRequest);
+        console.log("PRODUCTS filter", productsResponse);
+        const filteredProducts = productsResponse.filter(
+            product => product.category === categoryRequest
+        );
+        console.log("CfilteredProducts", filteredProducts);
+        return filteredProducts;
     } catch (error) {
       throw error;
     }

@@ -29,10 +29,10 @@ router.get('/id/:id', async (req, res) => {
 router.get('/:category', async (req, res) => {
   try {
     console.log("ENTRO ROUTER", req.params.category);
-    const products = await productController.filterByCategory(req.params.category);
+    const filteredProducts = await productController.filterByCategory(req.params.category);
     const categories = await productController.findAllCategories();
 
-    //res.render('products/products', { products , categories});
+    res.render('products/products', { filteredProducts , categories});
   
   } catch (error) {
       console.error("Error al obtener productos: ", error);
