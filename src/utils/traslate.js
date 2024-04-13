@@ -1,5 +1,5 @@
 const translate = require('node-google-translate-skidz');
-const IDIOMA = 'es';
+const LANGUAGE = 'es';
 
 
 async function translateAllProducts(products) {
@@ -7,9 +7,9 @@ async function translateAllProducts(products) {
     await Promise.all(products.map( async prod => {
         translateProducts.push({ 
                 ...prod,
-                title: await translateText(prod.title),
-                description: await translateText(prod.description),
-                category: (await translateText(prod.category)).toLowerCase()
+                title: await translateText(prod.title, LANGUAGE),
+                description: await translateText(prod.description, LANGUAGE),
+                category: (await translateText(prod.category, LANGUAGE)).toLowerCase()
             })
             return translateProducts;
     }));
@@ -20,18 +20,18 @@ async function translateAllProducts(products) {
 async function translateCategories(categories) {
     const translate = [];
     for (const category of categories) {
-      const traduccion = await translateText(category);
+      const traduccion = await translateText(category, LANGUAGE);
       translate.push(traduccion);
     }
     return translate;
   }
 
-function translateText(texto) {
+function translateText(texto, language) {
     return new Promise((resolve, reject) => {
       translate({
         text: texto,
         source: 'auto',
-        target: IDIOMA
+        target: language
       }, function (result) {
         resolve(result.translation);
       });
@@ -40,5 +40,6 @@ function translateText(texto) {
 
 module.exports= {
     translateAllProducts,
-    translateCategories
+    translateCategories,
+    translateText
 }

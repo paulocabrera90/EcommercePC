@@ -1,22 +1,6 @@
-doctype html
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    title Productos
-    link(rel="stylesheet", href="/styles/styles.css")
-  body
+extends ../landing
 
-    //- Formulario de filtro por categoría
-    .categories-container
-         form(action="/filtrar-productos", method="GET")
-            label(for="categoria") Filtrar por categoría:
-            select(name="categoria", id="categoria")
-                option(value="") Todas las categorías
-                each categoria in categories
-                    option(value=categoria)= categoria
-            button(type="submit") Filtrar
-
+block content
     .product-container
         each product in products
             .product-card 

@@ -3,11 +3,12 @@ const globalConstants = require('../const/globalConst');
 const traslate = require('../utils/traslate');
 const URI_PRODUCTS = 'products';
 const URI_CATEGORIES = 'categories';
+//const productsResponse = {};
 
 async function findAll() {
     try{
-        const response = await axios.get(globalConstants.APIURL+URI_PRODUCTS);        
-        const products = await traslate.translateAllProducts(response.data);
+        const productsResponse = await axios.get(globalConstants.APIURL+URI_PRODUCTS);
+        const products = await traslate.translateAllProducts(productsResponse.data);
      
         return products;
 
@@ -26,11 +27,23 @@ async function findById(id) {
 }
 
 async function findAllCategories() {
+    
     try{
         const response = await axios.get(globalConstants.APIURL+URI_PRODUCTS+'/'+URI_CATEGORIES); 
-        const categories = await traslate.translateCategories(response.data);       
-
+        const categories = await traslate.translateCategories(response.data);
         return categories;
+    } catch (error) {
+      throw error;
+    }
+}
+
+async function filterByCategory(categoryRequest) {
+    const language = 'en';
+    try{
+        console.log("CATEGORIA NO TRADUCIDA", categoryRequest);
+        const category = await traslate.translateText(categoryRequest, language);
+        console.log("CATEGORIA TRADUCIDA", category);
+        return category;
     } catch (error) {
       throw error;
     }
@@ -39,6 +52,7 @@ async function findAllCategories() {
 module.exports= { 
     findAll, 
     findById,
-    findAllCategories
+    findAllCategories,
+    filterByCategory
 }
 
