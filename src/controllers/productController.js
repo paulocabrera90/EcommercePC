@@ -6,16 +6,17 @@ const { getProducts, getCategories } = require('../services/productService');
 let productsResponse;
 let categoriesResponse;
 
-async function findAll() {
+async function findAll(req, res) {
     try{
         productsResponse = await getProducts();
         categoriesResponse = await getCategories();
-        const products = await traslate.translateAllProducts(productsResponse);
+        productsResponse = await traslate.translateAllProducts(productsResponse);
      
-        return products;
+       return res.render('products/products', { productsResponse , categoriesResponse});
 
     } catch (error) {
-      throw error;
+        console.error("Error al obtener productos: ", error);
+        res.status(500).send("Error al obtener productos");
     }
 }
 
@@ -38,18 +39,18 @@ async function findAllCategories() {
     }
 }
 
-async function filterByCategory(categoryRequest) {
+async function filterByCategory(req, res) {
     try{
-        productsResponse = await getProducts();
-        console.log("Category filter", categoryRequest);
-        console.log("PRODUCTS filter", productsResponse);
-        const filteredProducts = productsResponse.filter(
-            product => product.category === categoryRequest
+        console.log("filter: ", req.params.category)
+
+        productsResponse = productsResponse.filter(
+            product => product.category === req.params.category
         );
-        console.log("CfilteredProducts", filteredProducts);
-        return filteredProducts;
+        
+        return res.render('products/products', { productsResponse , categoriesResponse});
     } catch (error) {
-      throw error;
+        console.error("Error al obtener productos con filtro de categoria: ", error);
+        res.status(500).send("Error al obtener productos con filtro de categoria");
     }
 }
 
