@@ -15,7 +15,7 @@ async function findAll(req, res) {
        return res.render('products/products', { productsResponse , categoriesResponse});
 
     } catch (error) {
-        console.error("Error al obtener productos: ", error);
+        console.error("/GET Error al obtener productos: ", error);
         res.status(500).send("Error al obtener productos");
     }
 }
@@ -41,15 +41,13 @@ async function findAllCategories() {
 
 async function filterByCategory(req, res) {
     try{
-        console.log("filter: ", req.params.category)
-
         productsResponse = productsResponse.filter(
-            product => product.category === req.params.category
+            product => product.category === req.body.category
         );
         
         return res.render('products/products', { productsResponse , categoriesResponse});
     } catch (error) {
-        console.error("Error al obtener productos con filtro de categoria: ", error);
+        console.error("/POST Error al obtener productos con filtro de categoria: ", error);
         res.status(500).send("Error al obtener productos con filtro de categoria");
     }
 }

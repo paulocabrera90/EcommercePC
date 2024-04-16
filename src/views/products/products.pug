@@ -10,6 +10,14 @@ block content
                     .product-card-container-info 
                         h2.product-title= product.title 
                         p.product-price Precio: #{product.price}
-                        p.product-description Descripcion: #{product.description} 
+                        .product-card-container-info-description
+                            p.product-description Descripcion: #{product.description} 
                         p.product-category Categoria: #{product.category} 
                         p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ratings) 
+                    .product-card-container-button
+                        button.add-to-cart-button(type="button")
+                            | Agregar al carrito
+                        .product-quantity-spinner
+                            button.minus-button(type="button") -
+                            input(type="number" min="1" value="1")
+                            button.plus-button(type="button") +

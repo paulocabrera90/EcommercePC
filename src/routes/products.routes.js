@@ -3,6 +3,7 @@ const router = require('express').Router();
 const { findAll, filterByCategory, findAllCategories } = require('../controllers/productController');
 
 router.get('/', findAll);
-router.get('/:category', filterByCategory); 
+
+router.post('/', filterByCategory); 
 
 module.exports = router;
