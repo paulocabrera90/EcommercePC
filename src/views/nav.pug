@@ -1,0 +1,10 @@
+
+//- Formulario de filtro por categoría
+.categories-container
+    form(action="/api/products", method="POST")
+        label(for="categoria") Filtrar por categoría:
+        select(name="categoria", id="categoria" onchange="filtrarProductos(this.value)")
+            option(value="") Todas las categorías
+            each categoria in categoriesResponse
+                option(value=categoria)= categoria
+        button(type="submit") Filtrar

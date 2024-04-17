@@ -9,7 +9,7 @@ let categoriesResponse;
 async function findAll(req, res) {
     try{
         productsResponse = await getProducts();
-        categoriesResponse = await getCategories();
+        findAllCategories();
         productsResponse = await traslate.translateAllProducts(productsResponse);
      
        return res.render('products/products', { productsResponse , categoriesResponse});
@@ -31,8 +31,10 @@ async function findById(id) {
 async function findAllCategories() {
     
     try{
-        const categories = await traslate.translateCategories(categoriesResponse);
-        return categories;
+        categoriesResponse = await getCategories();
+
+        categoriesResponse = await traslate.translateCategories(categoriesResponse);
+        return categoriesResponse;
 
     } catch (error) {
       throw error;
