@@ -2,11 +2,12 @@ const axios = require('axios');
 const globalConstants = require('../const/globalConst');
 
 const URI_PRODUCTS = 'products';
-const URI_CATEGORIES = 'categories';
+const URI_CATEGORIES = '/categories';
 
 async function getProducts() {
-    try{
-        const productsResponse = await axios.get(globalConstants.APIURL+URI_PRODUCTS);
+    try { 
+
+        const productsResponse = await axios.get(globalConstants.API_URL+URI_PRODUCTS);
         return productsResponse.data;
 
     } catch (error) {
@@ -16,8 +17,8 @@ async function getProducts() {
 
 async function getCategories() {
     
-    try{
-        const categoriesResponse = await axios.get(globalConstants.APIURL+URI_PRODUCTS+'/'+URI_CATEGORIES); 
+    try {
+        const categoriesResponse = await axios.get(globalConstants.API_URL+URI_PRODUCTS+URI_CATEGORIES); 
         return categoriesResponse.data;
     } catch (error) {
       throw  "Error categories service: " + error;

@@ -1,6 +1,15 @@
 extends ../landing
 
 block content
+    .categories-container
+        form(action="/api/products/category", method="POST")
+            label(for="categoria") Filtrar por categoría:
+            select(name="categoria", id="categoria" onchange="filtrarProductos(this.value)")
+                option(value="") Todas las categorías
+                if categoriesResponse && Array.isArray(categoriesResponse)
+                    each categoria in categoriesResponse
+                        option(value=categoria)= categoria
+
     .product-container
         each product in productsResponse
             .product-card 

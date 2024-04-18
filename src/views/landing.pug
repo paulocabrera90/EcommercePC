@@ -7,11 +7,19 @@ html(lang="en")
     link(rel="stylesheet", href="/styles/footerStyle.css")
 
   body
+
     include nav.pug
     product-info 
         h2.product-title= "PRUEBA LANDING"
+        
     block content
 
     include footer.pug
-    
+
+    script.
+      const globalConstants = {
+            PORT: "#{port}",
+            APPLICATION_NAME: "#{applicationName}",
+      }
     script(src="/js/commons.js")
+    

@@ -1,5 +1,6 @@
 const express = require('express')
 
+const localStorage = require
 const globalConstants = require('./const/globalConst')
 const routerConfig = require('./routes/index.routes')
 const join = globalConstants.JOIN;

@@ -1,8 +1,8 @@
-const globalConstants = require('../src/const/globalConst');
-const URI = 'http://localhost:'+ globalConstants.PORT+"/"+ globalConstants.APPLICATION_NAME;
+const URI = 'http://localhost:'+ globalConstants.PORT +"/"+ globalConstants.APPLICATION_NAME;
 const PRODUCTS = '/products';
+
 function filtrarProductos(categoriaSeleccionada) {
-    fetch(URI+PRODUCTS, {
+    fetch(URI+PRODUCTS+"/category", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -13,8 +13,12 @@ function filtrarProductos(categoriaSeleccionada) {
     })
     .then(response => {
         // Manejar la respuesta según sea necesario
+        console.log("response", response);
+        window.location.href = URI+PRODUCTS+"/category";
     })
     .catch(error => {
         console.error('Error al filtrar productos:', error);
     });
+
+    
 }

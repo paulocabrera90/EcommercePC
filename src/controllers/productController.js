@@ -1,18 +1,27 @@
-const axios = require('axios');
 const globalConstants = require('../const/globalConst');
 const traslate = require('../utils/traslate');
 const { getProducts, getCategories } = require('../services/productService');
+
+const port = globalConstants.PORT;
+const applicationName = globalConstants.APPLICATION_NAME;
 
 let productsResponse;
 let categoriesResponse;
 
 async function findAll(req, res) {
     try{
+        console.log("findAll");
         productsResponse = await getProducts();
-        findAllCategories();
+        
+        await findAllCategories();
         productsResponse = await traslate.translateAllProducts(productsResponse);
      
-       return res.render('products/products', { productsResponse , categoriesResponse});
+       return res.render('products/products', { 
+            productsResponse , 
+            categoriesResponse,
+            port,
+            applicationName
+        });
 
     } catch (error) {
         console.error("/GET Error al obtener productos: ", error);
@@ -43,11 +52,17 @@ async function findAllCategories() {
 
 async function filterByCategory(req, res) {
     try{
-        productsResponse = productsResponse.filter(
+        console.log("filterByCategory");
+        const productsFiltered = productsResponse.filter(
             product => product.category === req.body.category
         );
-        
-        return res.render('products/products', { productsResponse , categoriesResponse});
+        return res.render('products/products', { 
+            productsResponse: productsFiltered, 
+            categoriesResponse,
+            port,
+            applicationName
+        });
+
     } catch (error) {
         console.error("/POST Error al obtener productos con filtro de categoria: ", error);
         res.status(500).send("Error al obtener productos con filtro de categoria");
