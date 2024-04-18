@@ -14,7 +14,7 @@ function filtrarProductos(categoriaSeleccionada) {
     .then(response => {
         // Manejar la respuesta según sea necesario
         console.log("response", response);
-        window.location.href = URI+PRODUCTS+"/category";
+        //window.location.href = URI+PRODUCTS+"/category";
     })
     .catch(error => {
         console.error('Error al filtrar productos:', error);
