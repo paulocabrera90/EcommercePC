@@ -52,9 +52,11 @@ async function findAllCategories() {
 
 async function filterByCategory(req, res) {
     try{
-        console.log("filterByCategory");
+       
+        const category = req.query.category;
+        console.log("filterByCategory-> ", category);
         const productsFiltered = productsResponse.filter(
-            product => product.category === req.body.category
+            product => product.category === category
         );
         return res.render('products/products', { 
             productsResponse: productsFiltered, 
@@ -64,7 +66,7 @@ async function filterByCategory(req, res) {
         });
 
     } catch (error) {
-        console.error("/POST Error al obtener productos con filtro de categoria: ", error);
+        console.error("/GET Error al obtener productos con filtro de categoria: ", error);
         res.status(500).send("Error al obtener productos con filtro de categoria");
     }
 }

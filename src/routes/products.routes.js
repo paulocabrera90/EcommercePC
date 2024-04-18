@@ -4,6 +4,6 @@ const { findAll, filterByCategory } = require('../controllers/productController'
 
 router.get('/', findAll);
 
-router.post('/category', filterByCategory); 
+router.get('/category', filterByCategory); 
 
 module.exports = router;
