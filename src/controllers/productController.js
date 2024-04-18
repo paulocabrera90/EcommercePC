@@ -52,16 +52,27 @@ async function findAllCategories() {
 
 async function filterByCategory(req, res) {
     try{
-        console.log("filterByCategory");
-        const productsFiltered = productsResponse.filter(
-            product => product.category === req.body.category
-        );
-        return res.render('products/products', { 
+        const category = req.body.category;
+        const response = {};
+        
+        if(category === 'Todas las categoritas') {
+            response = res.json({ productsResponse });
+        } else {
+            const productsFiltered = productsResponse.filter(
+                product => product.category === category
+            );
+
+            response = res.json({ productsResponse: productsFiltered });
+        }
+        
+        return response; 
+        
+       /* return res.render('products/products', { 
             productsResponse: productsFiltered, 
             categoriesResponse,
             port,
             applicationName
-        });
+        });*/
 
     } catch (error) {
         console.error("/POST Error al obtener productos con filtro de categoria: ", error);
