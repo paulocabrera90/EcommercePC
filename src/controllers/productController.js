@@ -10,13 +10,20 @@ let categoriesResponse;
 
 async function findAll(req, res) {
     try{
-        console.log("findAll");
-        productsResponse = await getProducts();
-        
-        await findAllCategories();
-        productsResponse = await traslate.translateAllProducts(productsResponse);
-     
-       return res.render('products/products', { 
+
+        console.log("productsResponse", productsResponse);
+        if (!productsResponse) {
+            console.log("productsResponse");
+            productsResponse = await getProducts();
+            productsResponse = await traslate.translateAllProducts(productsResponse);
+        }
+
+        if(!categoriesResponse) { 
+            console.log("categoriesResponse");
+            await findAllCategories(); 
+        }
+             
+        res.render('products/products', { 
             productsResponse , 
             categoriesResponse,
             port,
@@ -52,18 +59,31 @@ async function findAllCategories() {
 
 async function filterByCategory(req, res) {
     try{
-       
+            
         const category = req.query.category;
-        console.log("filterByCategory-> ", category);
-        const productsFiltered = productsResponse.filter(
-            product => product.category === category
-        );
-        return res.render('products/products', { 
-            productsResponse: productsFiltered, 
-            categoriesResponse,
-            port,
-            applicationName
-        });
+
+        if(category === 'all'){
+
+            res.render('products/products', { 
+                productsResponse, 
+                categoriesResponse,
+                port,
+                applicationName
+            });
+        } else {
+
+           const productsFiltered = productsResponse.filter(
+                product => product.category === category.toLowerCase()
+            );
+            res.render('products/products', { 
+                productsResponse: productsFiltered, 
+                categoriesResponse,
+                port,
+                applicationName,
+                selectedCategory: category
+            });
+        }
+                    
 
     } catch (error) {
         console.error("/GET Error al obtener productos con filtro de categoria: ", error);

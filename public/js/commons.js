@@ -1,31 +1,12 @@
 const URI = 'http://localhost:'+ globalConstants.PORT +"/"+ globalConstants.APPLICATION_NAME;
 const PRODUCTS = '/products';
-
-/*function filtrarProductos(categoriaSeleccionada) { //PSOT
-    fetch(URI+PRODUCTS+"/category", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            category: categoriaSeleccionada
-        })
-    })
-    .then(response => {
-        // Manejar la respuesta según sea necesario
-        console.log("response", response);
-        //window.location.href = URI+PRODUCTS+"/category";
-    })
-    .catch(error => {
-        console.error('Error al filtrar productos:', error);
-    });
-
-    
-} */
+const categoryClicked = localStorage.getItem('category-clicked');
 
 function filtrarProductos(categoriaSeleccionada) {
     const url = `${URI}${PRODUCTS}/category?category=${categoriaSeleccionada}`;
 
+    window.location.href = url;
+    localStorage.setItem('category-clicked', categoriaSeleccionada);
     fetch(url)
     .then(response => {
         if (!response.ok) {
@@ -33,16 +14,21 @@ function filtrarProductos(categoriaSeleccionada) {
         }
         return response.json();
     })
-    .then(data => {
-        console.log("response", data);
-        window.location.href = `${URI}${PRODUCTS}`;
-        renderProducts(data);
-    })
     .catch(error => {
         console.error('Error al filtrar productos:', error);
     });
 }
 
-function renderProducts(data) {
-    console.log("response renderProducts", data);
-}
+document.addEventListener("DOMContentLoaded", function() {
+    const shortDescriptions = document.querySelectorAll(".short-description");
+
+    shortDescriptions.forEach(function(shortDescription) {
+        shortDescription.addEventListener("mouseover", function() {
+            this.nextElementSibling.style.display = "inline"; // Mostrar el span siguiente
+        });
+
+        shortDescription.addEventListener("mouseout", function() {
+            this.nextElementSibling.style.display = "none"; // Ocultar el span siguiente
+        });
+    });
+});
