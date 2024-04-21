@@ -3,7 +3,7 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Ecommerce PC - Cart
-    link(rel="stylesheet", href="/styles/styles.css")
+    link(rel="stylesheet", href="/styles/cartStyle.css")
     link(rel="stylesheet", href="/styles/navStyle.css")
     link(rel="stylesheet", href="/styles/footerStyle.css")
 
@@ -11,7 +11,27 @@ html(lang="en")
 
     include ../nav.pug
         
-    //block content
+    .cart-container
+        .cart-wrapper
+            .product-cart-container
+                each product in productsResponse
+                    .product-cart-card 
+                        .product-cart-card-container
+                            .product-cart-card-container-image
+                                img(src=product.image, alt=product.title, class="product-cart-card-container-image")
+                            .product-cart-card-container-info
+                                .product-cart-card-container-descr 
+                                    h2.product-title= product.title                            
+                                    p.product-category Categoria: #{product.category}
+                                    p.product-price Precio: #{product.price}
+                                    p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ratings) 
+                                
+            .cart-summary-container
+                each cart in cartProducts
+                    ul.cart-item
+                        li #{cart.title}
+                        li Cantidad: #{cart.quantity}
+                        li Precio: $#{cart.price * cart.quantity}
 
     include ../footer.pug
 
