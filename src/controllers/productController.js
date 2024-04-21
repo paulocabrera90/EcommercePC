@@ -12,7 +12,6 @@ async function findAll(req, res) {
     try{
 
         if (!productsResponse) {
-            console.log("productsResponse");
             productsResponse = await getProducts();
             productsResponse = await traslate.translateAllProducts(productsResponse);
         }
