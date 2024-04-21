@@ -1,18 +1,6 @@
 extends ../landing
 
 block content
-    .categories-container
-        form(action="/api/products/category", method="GET")
-            label(for="categoria") Filtrar por categoría:
-            select(name="categoria", id="categoria" onchange="filtrarProductos(this.value)")
-                option(value="all") Todas las categorías
-                if categoriesResponse && Array.isArray(categoriesResponse)
-                    each categoria in categoriesResponse
-                        if categoria === selectedCategory
-                            option(value=categoria, selected)= categoria
-                        else
-                            option(value=categoria)= categoria
-
     .product-container
         each product in productsResponse
             .product-card 
@@ -21,12 +9,12 @@ block content
                         img(src=product.image, alt=product.title, class="product-card-container-image")
                     .product-card-container-info
                         .product-card-container-descr 
-                            h2.product-title= product.title 
-                            p.product-price Precio: #{product.price}
+                            h2.product-title= product.title                            
                             .product-card-container-info-description
-                                p.product-description(class="short-description") Descripcion: #{product.description.slice(0, 30)}
+                                p.product-description(class="short-description") Descripcion: #{product.description.slice(0, 40)}
                                 span.full-description(style="display:none;") #{product.description}
-                            p.product-category Categoria: #{product.category} 
+                            p.product-category Categoria: #{product.category}
+                            p.product-price Precio: #{product.price}
                             p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ratings) 
                         .product-card-container-button
                             button.add-to-cart-button(type="button")

@@ -11,7 +11,6 @@ let categoriesResponse;
 async function findAll(req, res) {
     try{
 
-        console.log("productsResponse", productsResponse);
         if (!productsResponse) {
             console.log("productsResponse");
             productsResponse = await getProducts();
@@ -19,7 +18,6 @@ async function findAll(req, res) {
         }
 
         if(!categoriesResponse) { 
-            console.log("categoriesResponse");
             await findAllCategories(); 
         }
              

@@ -1,1 +1,18 @@
+nav.navbar
+    .navbar-brand
+        h1 Ecommerce PC
+    img.logo(src="/images/logo.png", alt="Logo de la tienda")
+    button.cart-button(type="button", onclick="window.location='/api/cart'")
+        |Carrito de Compras
 
+.categories-container
+    form(action="/api/products/category", method="GET")
+        label(for="categoria") Filtrar por categoría:
+        select(name="categoria", id="categoria" onchange="filtrarProductos(this.value)")
+            option(value="all") Todas las categorías
+            if categoriesResponse && Array.isArray(categoriesResponse)
+                each categoria in categoriesResponse
+                    if categoria === selectedCategory
+                        option(value=categoria, selected)= categoria
+                    else
+                        option(value=categoria)= categoria

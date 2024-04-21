@@ -1,0 +1,43 @@
+.navbar {
+    background-color: #333;
+    color: white; 
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navbar-brand {
+    margin-right: 20px;
+  }
+  
+  .logo {
+    height: 40px;
+    margin-right: 20px; 
+  }
+  
+  .cart-button {
+    background-color: #f00;
+    color: white; 
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .categories-container {
+    margin-top: 20px; 
+  }
+  
+  .categories-container form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .categories-container label {
+    margin-right: 10px;
+  }
+  
+  .categories-container select {
+    padding: 5px;
+  }
+  

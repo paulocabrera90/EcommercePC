@@ -11,27 +11,25 @@ body {
   float: left;
   box-sizing: border-box;
   height: 50%;
-  overflow: hidden;
-  display: flex; /* Cambiado a flex para alinear los elementos */
+  display: flex;
   background-color: #333;
 }
 
 .product-container {
-  margin: 45px auto auto 15%;
-  max-width: 70%;
+  margin: 35px 12% 15% 10%;
   overflow: hidden;
   background-color: #d36262;
 }
 
 .product-card-container {
-  width: 100%; /* Ajuste para ocupar todo el ancho del contenedor */
-  display: flex; /* Alinear elementos en la fila */
-  justify-content: space-between; /* Espacio entre los elementos */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .product-card-container-descr {
   width: 90%;
-  padding-left: 5px;
+  padding-left: 15px;
 }
 
 .product-card-container-image {
@@ -45,6 +43,7 @@ body {
 .product-title {
   font-size: 1.2em;
   margin-bottom: 5px;
+  overflow: hidden;
 }
 
 .product-price,
@@ -52,16 +51,30 @@ body {
 .product-rating,
 .product-description {
   margin-bottom: 5px;
-  /* Si deseas aplicar estilos adicionales a estos elementos, 
-  puedes hacerlo aquí */
 }
 
 .product-card-container-info {
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
+  width: 100%;
 }
 
 .short-description {
   cursor: pointer;
-} 
+}
+
+.product-card-container-info-description {
+  position: relative; /* Establece la posición relativa para que la descripción completa sea relativa a este contenedor */
+}
+
+.full-description {
+  position: absolute;
+  top: 100%;
+  left: 0; 
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 5px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  display: none; 
+}

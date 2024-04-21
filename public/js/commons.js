@@ -24,11 +24,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     shortDescriptions.forEach(function(shortDescription) {
         shortDescription.addEventListener("mouseover", function() {
-            this.nextElementSibling.style.display = "inline"; // Mostrar el span siguiente
+            this.nextElementSibling.style.display = "block"; // Mostrar la descripción completa
         });
 
         shortDescription.addEventListener("mouseout", function() {
-            this.nextElementSibling.style.display = "none"; // Ocultar el span siguiente
+            this.nextElementSibling.style.display = "none"; // Ocultar la descripción completa
         });
     });
 });
