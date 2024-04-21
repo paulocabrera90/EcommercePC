@@ -21,6 +21,27 @@ async function saveProductsJSON(jsonData, filePath) {
   });
 }
 
+async function findProductsJSON(filePath, callback) {
+  fs.access(filePath, fs.constants.F_OK, async (err) => {
+    if (err) {
+        console.error('El archivo JSON no existe.');
+        callback(err);
+    } else {
+        await fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                console.error('Error al leer el archivo JSON:', err);
+                callback(err);
+            } else {
+                const datos = JSON.parse(data);
+                callback(null, datos);
+            }
+        });
+    }
+});
+  
+}
+
 module.exports = { 
-  saveProductsJSON
+  saveProductsJSON,
+  findProductsJSON
 }

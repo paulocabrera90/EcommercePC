@@ -1,6 +1,6 @@
 const axios = require('axios');
 const globalConstants = require('../const/globalConst');
-const { saveProductsJSON } = require('../db/dbPersistence');
+const { saveProductsJSON, findProductsJSON } = require('../db/dbPersistence');
 
 const URI_PRODUCTS = 'products';
 const URI_CATEGORIES = '/categories';
@@ -8,11 +8,17 @@ const filePath = 'src/db/productos.json';
 
 async function getProducts() {
     try { 
-
-        const productsResponse = await axios.get(globalConstants.API_URL+URI_PRODUCTS);
-
-        await saveProductsJSON(productsResponse.data, filePath);
-        console.log('JSON guardado correctamente. Service');
+        var productsResponse = {};
+        findProductsJSON(filePath, async (err, datos) => {
+            if (err) {
+                productsResponse = await axios.get(globalConstants.API_URL+URI_PRODUCTS);
+                console.log('Error interno del servidor.', productsResponse);
+            } else {
+                // Si no hay errores, enviar los datos como respuesta
+                console.log('Error interno del servidor.');
+                productsResponse = datos;
+            }
+        });
 
         return productsResponse.data;
 
