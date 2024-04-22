@@ -10,11 +10,11 @@ let categoriesResponse;
 
 async function findAll(req, res) {
     try{
-
+        
         if (!productsResponse) {
             console.log(">> Obteniendo los productos");
             productsResponse = await getProducts();
-            console.log("Find all, productsResponse- getProducts", productsResponse);
+            console.log("Find all, productsResponse- getProducts", JSON.stringify(productsResponse).substring(0, 20));
             productsResponse = await traslate.translateAllProducts(productsResponse);
         }
 

@@ -10,33 +10,23 @@ async function getProducts() {
     try { 
         let productsResponse;
         let flagExistProductsJson = await existProductsJSON(filePath);
-
-        console.log("flagExistProductsJson", flagExistProductsJson);
+        
         if (!flagExistProductsJson) {
             console.log("No existe el json");
-                productsResponse = await axios.get(globalConstants.API_URL+URI_PRODUCTS);
+            productsResponse = await axios.get(globalConstants.API_URL+URI_PRODUCTS);
+            productsResponse = await saveProductsJSON(productsResponse.data, filePath);
 
-                saveProductsJSON(productsResponse.data, filePath)
-                    .then(data => productsResponse = data)
-                    .catch(e => console.log("Error: ", e));
-
-                console.log('JSON guardado correctamente. Service');
+            console.log('JSON guardado correctamente. Service', JSON.stringify(productsResponse).substring(0,50));
 
         } else {
 
-                console.log('Leyendo archivo products.json');
-               readProductsJSON(filePath, (err, data) => {
-                    if (err) {
-                      console.error('Error al leer el archivo products.json:', err);
-                      return;
-                    }
-
-                    console.log('Datos del archivo JSON:', JSON.stringify(data).substring(0,20));
-                    productsResponse = data;
-
-                    return productsResponse;
-                });
+            console.log('Leyendo archivo products.json');
+            const data = await readProductsJSON(filePath);
+            console.log('Datos del archivo JSON:', JSON.stringify(data).substring(0, 20));
+            productsResponse = data;
         }
+        return productsResponse;
+
     } catch (error) {
       throw "Error products service: " + error;
     }    
