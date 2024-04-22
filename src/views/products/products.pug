@@ -3,20 +3,25 @@ extends ../landing
 block content
     .product-container
         each product in productsResponse
-            .product-card 
+            .product-card(class=product.offer ? 'offer-product' : '')
                 .product-card-container
                     .product-card-container-image
                         img(src=product.image, alt=product.title, class="product-card-container-image")
+                        if product.offer
+                            img(src="/img/oferta.png", alt="Oferta", class="offer-image")
                     .product-card-container-info
                         .product-card-container-descr 
                             h2.product-title= product.title                            
                             .product-card-container-info-description
                                 p.product-description(class="short-description") Descripcion: #{product.description.slice(0, 40)}
                                 span.full-description(style="display:none;") #{product.description}
-                            p.product-offer Oferta: #{product.offer}
-                            p.product-offerPercentage Porcentaje de Oferta: #{product.offerPercentage}
+                            //p.product-offerPercentage Porcentaje de Oferta: #{product.offerPercentage}
                             p.product-category Categoria: #{product.category}
-                            p.product-price Precio: #{product.price}
+                            if product.offer
+                                - const discountedPrice = product.price * (1 - (product.offerPercentage / 100))
+                                p.product-discountedPrice Precio con Descuento: #{discountedPrice.toFixed(2)}
+                            else
+                                p.product-price Precio: #{product.price}
                             p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ratings) 
                         .product-card-container-button
                             button.add-to-cart-button(type="button")

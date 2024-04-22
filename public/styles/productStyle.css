@@ -80,3 +80,13 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   display: none; 
 }
+
+.offer-image {
+  position: relative;
+  right: 120px;
+  bottom: 47px;
+  width: 90px;
+  height: 95px;
+  z-index: 1;
+  
+}
