@@ -12,6 +12,7 @@ async function findAll(req, res) {
     try{
 
         if (!productsResponse) {
+            console.log(">> Obteniendo los productos");
             productsResponse = await getProducts();
             console.log("Find all, productsResponse- getProducts", productsResponse);
             productsResponse = await traslate.translateAllProducts(productsResponse);

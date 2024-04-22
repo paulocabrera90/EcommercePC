@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors');
 
 const globalConstants = require('./const/globalConst')
 const routerConfig = require('./routes/index.routes')
@@ -9,6 +10,7 @@ const configurationApi = (app) => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
     app.use(express.static('public'));
+    app.use(cors());
 
     app.set('views', join(dirname, 'views'));
     app.set('view engine', 'pug');
