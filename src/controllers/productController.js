@@ -10,7 +10,7 @@ let categoriesResponse;
 
 async function findAll(req, res) {
     try{
-        
+
         if (!productsResponse) {
             console.log(">> Obteniendo los productos");
             productsResponse = await getProducts();
@@ -21,7 +21,8 @@ async function findAll(req, res) {
         if(!categoriesResponse) { 
             await findAllCategories(); 
         }
-             
+
+        console.log("ProductsResponse por renderizar: ", productsResponse);             
         res.render('products/products', { 
             productsResponse , 
             categoriesResponse,

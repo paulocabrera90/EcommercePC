@@ -13,6 +13,8 @@ block content
                             .product-card-container-info-description
                                 p.product-description(class="short-description") Descripcion: #{product.description.slice(0, 40)}
                                 span.full-description(style="display:none;") #{product.description}
+                            p.product-offer Oferta: #{product.offer}
+                            p.product-offerPercentage Porcentaje de Oferta: #{product.offerPercentage}
                             p.product-category Categoria: #{product.category}
                             p.product-price Precio: #{product.price}
                             p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ratings) 

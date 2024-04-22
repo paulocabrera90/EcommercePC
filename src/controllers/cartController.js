@@ -70,7 +70,7 @@ async function getAll (req, res){
             }
           ]
 
-        console.log(productsResponse);
+        console.log(JSON.stringify(productsResponse).substring(0,50));
         res.render('cart/cart', {
             productsResponse,
             cartProducts: cartResponse,

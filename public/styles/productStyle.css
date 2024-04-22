@@ -47,6 +47,8 @@ body {
 }
 
 .product-price,
+.product-offer,
+.product-offerPercentage,
 .product-category,
 .product-rating,
 .product-description {

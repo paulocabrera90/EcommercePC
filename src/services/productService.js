@@ -1,46 +1,57 @@
 const axios = require('axios');
 const globalConstants = require('../const/globalConst');
-const { saveProductsJSON, existProductsJSON, readProductsJSON } = require('../db/dbPersistence');
+const { saveJSON, existJSON, readJSON } = require('../db/dbPersistence');
+const { addOfferFields } = require('../utils/productsUtils');
 
 const URI_PRODUCTS = 'products';
 const URI_CATEGORIES = '/categories';
-const filePath = 'src/db/productos.json';
 
-async function getProducts() {
+async function existOrCreate(filePath, uri, flagProduct) {
     try { 
-        let productsResponse;
-        let flagExistProductsJson = await existProductsJSON(filePath);
+        let response;
+        let flagExistJSON = await existJSON(filePath);
         
-        if (!flagExistProductsJson) {
-            console.log("No existe el json");
-            productsResponse = await axios.get(globalConstants.API_URL+URI_PRODUCTS);
-            productsResponse = await saveProductsJSON(productsResponse.data, filePath);
+        if (!flagExistJSON) {
+            console.log("No existe el json. Se va a crear en la ruta: ", filePath);
+            response = await axios.get(globalConstants.API_URL+uri);
 
-            console.log('JSON guardado correctamente. Service', JSON.stringify(productsResponse).substring(0,50));
+            if(flagProduct) { 
+                console.log("Agregando ofertas a los productos; ",  JSON.stringify(response.data));
+                response.data = await addOfferFields(response.data); 
+
+                console.log('Response con las offertas agregadas', JSON.stringify(response.data).substring(0,50));
+            } 
+
+            response = await saveJSON(response.data, filePath);
+
+            console.log('JSON guardado correctamente. Service', JSON.stringify(response).substring(0,50));
 
         } else {
 
             console.log('Leyendo archivo products.json');
-            const data = await readProductsJSON(filePath);
+            const data = await readJSON(filePath);
             console.log('Datos del archivo JSON:', JSON.stringify(data).substring(0, 20));
-            productsResponse = data;
+
+            response = data;
         }
-        return productsResponse;
+        return response;
 
     } catch (error) {
       throw "Error products service: " + error;
-    }    
+    }   
+}
+
+async function getProducts() {
+    console.log("Get products");
+    const filePath = 'src/db/productos.json';
+    return existOrCreate(filePath, URI_PRODUCTS, true);
 }
 
 
 async function getCategories() {
-    
-    try {
-        const categoriesResponse = await axios.get(globalConstants.API_URL+URI_PRODUCTS+URI_CATEGORIES); 
-        return categoriesResponse.data;
-    } catch (error) {
-      throw  "Error categories service: " + error;
-    }
+    console.log("Get categories");
+    const filePath = 'src/db/categories.json';
+    return existOrCreate(filePath, URI_PRODUCTS + URI_CATEGORIES, false);
 }
 
 module.exports= { 

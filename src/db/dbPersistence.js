@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-async function saveProductsJSON(jsonData, filePath) {
+async function saveJSON(jsonData, filePath) {
   try {
       await fs.promises.writeFile(filePath, JSON.stringify(jsonData));
       console.log('Archivo guardado exitosamente');
@@ -11,7 +11,7 @@ async function saveProductsJSON(jsonData, filePath) {
   }
 }
 
-async function readProductsJSON(filePath) {
+async function readJSON(filePath) {
   try {
       const data = await fs.promises.readFile(filePath, 'utf8');
       return JSON.parse(data);
@@ -21,7 +21,7 @@ async function readProductsJSON(filePath) {
   }
 }
 
-async function existProductsJSON(filePath) {
+async function existJSON(filePath) {
 
   console.log('\n> Chequeando si el archivo existe...');
 
@@ -39,7 +39,7 @@ async function existProductsJSON(filePath) {
 }
 
 module.exports = { 
-  saveProductsJSON,
-  existProductsJSON,
-  readProductsJSON
+  saveJSON,
+  existJSON,
+  readJSON
 }
