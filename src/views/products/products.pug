@@ -24,9 +24,7 @@ block content
                                 p.product-price Precio: #{product.price}
                             p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ventas) 
                         .product-card-container-button
-                            button.add-to-cart-button(type="button" class=productsInCart >= 10 ? 'disabled' : '')
+                            button.add-to-cart-button(type="button", data-product=product)
                                 | Agregar al carrito
-                                if productsInCart >= 10
-                                    p.alert-message No puedes agregar más de 10 productos
                             .product-quantity-spinner
                                 input(type="number" min="1" value="1")
