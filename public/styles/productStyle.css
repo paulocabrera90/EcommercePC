@@ -10,7 +10,7 @@ body {
   width: calc(25% - 20px);
   float: left;
   box-sizing: border-box;
-  height: 50%;
+  height: 55%;
   display: flex;
   background-color: #333;
 }
@@ -49,6 +49,8 @@ body {
 .product-price,
 .product-offer,
 .product-offerPercentage,
+.product-amountOff,
+.product-oamountFinal,
 .product-category,
 .product-rating,
 .product-description {

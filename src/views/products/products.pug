@@ -15,16 +15,18 @@ block content
                             .product-card-container-info-description
                                 p.product-description(class="short-description") Descripcion: #{product.description.slice(0, 40)}
                                 span.full-description(style="display:none;") #{product.description}
-                            //p.product-offerPercentage Porcentaje de Oferta: #{product.offerPercentage}
                             p.product-category Categoria: #{product.category}
                             if product.offer
-                                - const discountedPrice = product.price * (1 - (product.offerPercentage / 100))
-                                p.product-discountedPrice Precio con Descuento: #{discountedPrice.toFixed(2)}
+                                p.product-price Precio: $ #{product.price}
+                                p.product-offerPercentage Descuento: #{product.offerPercentage}%
+                                p.product-amountOff Monto a descontar: $ #{product.amountOff.toFixed(2)}
+                                - const amountFinal = product.price - product.amountOff
+                                p.product-amountFinal Precio Final: $ #{amountFinal.toFixed(2)}
                             else
-                                p.product-price Precio: #{product.price}
+                                p.product-price Precio: $#{product.price}
                             p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ventas) 
                         .product-card-container-button
                             button.add-to-cart-button(type="button", data-product=product)
                                 | Agregar al carrito
                             .product-quantity-spinner
-                                input(type="number" min="1" value="1")
+                                input.product-quantity-spinner-counter(type="number" min="1" value="1")

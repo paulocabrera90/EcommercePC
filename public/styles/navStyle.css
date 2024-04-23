@@ -41,3 +41,16 @@
     padding: 5px;
   }
   
+  .count-circle {
+    width: 30px;
+    height: 30px;   
+    top: 15px;
+    right: 85px;
+    border-radius: 25%;
+    background-color: #dbdad6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    color: black;
+  }
