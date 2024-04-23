@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         btn.addEventListener('click', () => {
            
-            const dataSetProduct =  btn.dataset.product;
+            const dataSetProduct =  JSON.parse(btn.dataset.product);
             console.log("Product dataset", dataSetProduct);
 
             const productId = dataSetProduct.id;
