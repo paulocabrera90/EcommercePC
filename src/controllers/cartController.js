@@ -7,13 +7,14 @@ async function getAll (req, res){
     try {
         console.log("Inicio de carga del carrito...");
         const encodedProductsForCart = req.query.products;
-        const productsForCart = decodeURIComponent(encodedProductsForCart);
-        console.log("ProductsForCart-> ", productsForCart);
         
+        let productCartResponse =  JSON.parse(encodedProductsForCart);
         let cartResponse = [];
 
+        console.log("productCartResponse-> ", productCartResponse);
+
         res.render('cart/cart', {
-            productsResponse: productsForCart,
+            productsResponse: productCartResponse,
             cartProducts: cartResponse,
             port,
             applicationName

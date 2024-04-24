@@ -1,4 +1,3 @@
-//const URI = 'http://localhost:'+ globalConstants.PORT +"/"+ globalConstants.APPLICATION_NAME;
 const CART = '/cart';
 
 document.getElementById('openCart').addEventListener('click', function() {
@@ -8,17 +7,17 @@ document.getElementById('openCart').addEventListener('click', function() {
     const encodedData = encodeURIComponent(productsForCart);
 
     const url = `${URI}${CART}?products=${encodedData}`;
-    console.log('URL', url);
     window.location.href = url;
 
     fetch(url)
     .then(response => {
         if (!response.ok) {
-            throw new Error('Error al armar el carrito : ' + response.statusText);
+            throw new Error('Error al filtrar productos en el response: ' + response.statusText);
         }
         return response.json();
     })
     .catch(error => {
-        console.error('Error:', error);
+        console.error('Error al filtrar productos:', error);
     });
+   
 });

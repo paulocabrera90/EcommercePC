@@ -26,12 +26,12 @@ html(lang="en")
                                     p.product-price Precioclear: #{product.productAmountFinal}
                                     p.product-price Cantidad: #{product.productQuantity}
                                 
-            .cart-summary-container
-                each cart in cartProducts
-                    ul.cart-item
-                        li #{cart.title}
-                        li Cantidad: #{cart.quantity}
-                        li Precio: $#{cart.price * cart.quantity}
+            //- .cart-summary-container
+            //-     each cart in cartProducts
+            //-         ul.cart-item
+            //-             li #{cart.title}
+            //-             li Cantidad: #{cart.quantity}
+            //-             li Precio: $#{cart.price * cart.quantity}
 
     include ../footer.pug
 
