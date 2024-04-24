@@ -1,12 +1,12 @@
 const URI = 'http://localhost:'+ globalConstants.PORT +"/"+ globalConstants.APPLICATION_NAME;
 const PRODUCTS = '/products';
-const categoryClicked = localStorage.getItem('category-clicked');
 
 function filtrarProductos(categoriaSeleccionada) {
     const url = `${URI}${PRODUCTS}/category?category=${categoriaSeleccionada}`;
 
     window.location.href = url;
     localStorage.setItem('category-clicked', categoriaSeleccionada);
+
     fetch(url)
     .then(response => {
         if (!response.ok) {

@@ -18,13 +18,13 @@ html(lang="en")
                     .product-cart-card 
                         .product-cart-card-container
                             .product-cart-card-container-image
-                                img(src=product.image, alt=product.title, class="product-cart-card-container-image")
+                                img(src=product.productImg, alt=product.productTitle, class="product-cart-card-container-image")
                             .product-cart-card-container-info
                                 .product-cart-card-container-descr 
-                                    h2.product-title= product.title                            
-                                    p.product-category Categoria: #{product.category}
-                                    p.product-price Precio: #{product.price}
-                                    p.product-rating Rating: #{product.rating.rate} (#{product.rating.count} ratings) 
+                                    h2.product-title= product.productTitle
+                                    p.product-price Precio: #{product.productPrice}
+                                    p.product-price Precioclear: #{product.productAmountFinal}
+                                    p.product-price Cantidad: #{product.productQuantity}
                                 
             .cart-summary-container
                 each cart in cartProducts
@@ -42,3 +42,4 @@ html(lang="en")
       }
     script(src="/js/commons.js")
     script(src="/js/cart.js")
+    script(src="/js/product.js")

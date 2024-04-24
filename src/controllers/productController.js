@@ -14,7 +14,7 @@ async function findAll(req, res) {
         if (!productsResponse) {
             console.log(">> Obteniendo los productos");
             productsResponse = await getProducts();
-            console.log("Find all, productsResponse- getProducts", JSON.stringify(productsResponse).substring(0, 20));
+            console.log("Find all, productsResponse- getProducts", JSON.stringify(productsResponse).substring(0, 50));
             productsResponse = await traslate.translateAllProducts(productsResponse);
         }
 
@@ -22,7 +22,7 @@ async function findAll(req, res) {
             await findAllCategories(); 
         }
 
-        console.log("ProductsResponse por renderizar: ", productsResponse);             
+        console.log("ProductsResponse por renderizar: ", JSON.stringify(productsResponse).substring(0, 50));             
         res.render('products/products', { 
             productsResponse , 
             categoriesResponse,
