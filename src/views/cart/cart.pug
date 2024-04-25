@@ -15,8 +15,10 @@ html(lang="en")
         .cart-wrapper
             .product-cart-container
                 each product in productsResponse
-                    .product-cart-card 
+                    .product-cart-card(data-product-id=product.productId)
                         .product-cart-card-container
+                            .product-cart-card-delete
+                                button.product-cart-card-delte-button(type="button", id=("btnDeleteProductCart")) Eliminar
                             .product-cart-card-container-image
                                 img(src=product.productImg, alt=product.productTitle, class="product-cart-card-container-image")
                             .product-cart-card-container-info

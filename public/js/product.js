@@ -59,6 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             localStorage.setItem('productsForCart', JSON.stringify(cartAdd));
             countBtnCart(btnCartCount);
+            spinnerQuantity.forEach(spinner => { 
+                spinner.value = 1;
+            });
+            
         });
 
     });
@@ -72,3 +76,4 @@ function countBtnCart(btnCartCount) {
     btnCartCount.textContent = totalQuantity;    
 
 }
+

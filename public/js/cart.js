@@ -24,6 +24,7 @@ document.getElementById('openCart').addEventListener('click', function() {
         if (!response.ok) {
             throw new Error('Error al filtrar productos en el response: ' + response.statusText);
         }
+        console.log('GET cart correctamente:', response.json());
         return response.json();
     })
     .catch(error => {
@@ -35,4 +36,30 @@ document.getElementById('openCart').addEventListener('click', function() {
 btnCleanCart.addEventListener('click', function() {
     localStorage.clear();
     window.location.href = `${URI}${PRODUCTS}`;
+});
+
+
+const btnDeleteProduct = document.querySelectorAll('.product-cart-card-delte-button');
+btnDeleteProduct.forEach(button => {
+        button.addEventListener('click', function() {
+            
+            const productsForCart = JSON.parse(localStorage.getItem('productsForCart'));
+            const productCard = button.closest('.product-cart-card');
+            const productCardId = parseInt(productCard.dataset.productId, 10);
+            const productIndex = productsForCart.findIndex(product => product.productId === productCardId);        
+                
+            if (productIndex !== -1) {
+                productsForCart.splice(productIndex, 1);
+
+                localStorage.setItem('productsForCart', JSON.stringify(productsForCart));
+            }
+
+            productCard.remove();
+
+            const encodedData = encodeURIComponent(localStorage.getItem('productsForCart'));
+
+            const url = `${URI}${CART}?products=${encodedData}`;
+            window.location.href = url;
+        });
+    
 });
