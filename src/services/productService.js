@@ -2,6 +2,7 @@ const axios = require('axios');
 const globalConstants = require('../const/globalConst');
 const { saveJSON, existJSON, readJSON } = require('../db/dbPersistence');
 const { addOfferFields } = require('../utils/productsUtils');
+const traslate = require('../utils/traslate');
 
 const URI_PRODUCTS = 'products';
 const URI_CATEGORIES = '/categories';
@@ -54,7 +55,20 @@ async function getCategories() {
     return existOrCreate(filePath, URI_PRODUCTS + URI_CATEGORIES, false);
 }
 
+async function findAllCategories() {    
+    try{
+        categoriesResponse = await getCategories();
+
+        categoriesResponse = await traslate.translateCategories(categoriesResponse);
+        return categoriesResponse;
+
+    } catch (error) {
+      throw error;
+    }
+}
+
 module.exports= { 
     getProducts,
-    getCategories
+    getCategories,
+    findAllCategories
 }

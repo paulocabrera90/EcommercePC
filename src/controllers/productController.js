@@ -1,6 +1,6 @@
 const globalConstants = require('../const/globalConst');
 const traslate = require('../utils/traslate');
-const { getProducts, getCategories } = require('../services/productService');
+const { getProducts, findAllCategories } = require('../services/productService');
 
 const port = globalConstants.PORT;
 const applicationName = globalConstants.APPLICATION_NAME;
@@ -39,19 +39,6 @@ async function findAll(req, res) {
 async function findById(id) {
     try{              
         return id;
-    } catch (error) {
-      throw error;
-    }
-}
-
-async function findAllCategories() {
-    
-    try{
-        categoriesResponse = await getCategories();
-
-        categoriesResponse = await traslate.translateCategories(categoriesResponse);
-        return categoriesResponse;
-
     } catch (error) {
       throw error;
     }
