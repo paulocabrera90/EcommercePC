@@ -9,13 +9,11 @@ async function getAll (req, res){
         const encodedProductsForCart = req.query.products;
         
         let productCartResponse =  JSON.parse(encodedProductsForCart);
-        let cartResponse = [];
 
         console.log("productCartResponse-> ", productCartResponse);
 
         res.render('cart/cart', {
             productsResponse: productCartResponse,
-            cartProducts: cartResponse,
             port,
             applicationName
         });

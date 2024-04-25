@@ -1,6 +1,16 @@
 const CART = '/cart';
+const btnCleanCart = document.getElementById('btnCleanCart');
+const openCartButton = document.getElementById('openCart');
 
 document.getElementById('openCart').addEventListener('click', function() {
+
+    if (localStorage.getItem('productsForCart')) {
+        openCartButton.disabled = true;
+    } else {
+        alert("Debe ingresar al menos un producto...");
+        openCartButton.disabled = false;
+        return
+    }
    
     const productsForCart = localStorage.getItem('productsForCart');
     console.log('Productos para el carrito:', productsForCart);
@@ -20,4 +30,9 @@ document.getElementById('openCart').addEventListener('click', function() {
         console.error('Error al filtrar productos:', error);
     });
    
+});
+
+btnCleanCart.addEventListener('click', function() {
+    localStorage.clear();
+    window.location.href = `${URI}${PRODUCTS}`;
 });

@@ -21,17 +21,27 @@ html(lang="en")
                                 img(src=product.productImg, alt=product.productTitle, class="product-cart-card-container-image")
                             .product-cart-card-container-info
                                 .product-cart-card-container-descr 
-                                    h2.product-title= product.productTitle
-                                    p.product-price Precio: #{product.productPrice}
-                                    p.product-price Precioclear: #{product.productAmountFinal}
-                                    p.product-price Cantidad: #{product.productQuantity}
-                                
-            //- .cart-summary-container
-            //-     each cart in cartProducts
-            //-         ul.cart-item
-            //-             li #{cart.title}
-            //-             li Cantidad: #{cart.quantity}
-            //-             li Precio: $#{cart.price * cart.quantity}
+                                    h2.product-cart-title= product.productTitle
+                                    p.product-cart-price Precio: $
+                                        if product.productAmountFinal
+                                                | #{product.productAmountFinal.toFixed(2) * product.productQuantity}
+                                        else
+                                                | #{product.productPrice.toFixed(2) * product.productQuantity}
+                                    p.product-cart-quantity Cantidad: #{product.productQuantity}
+
+            .cart-summary-container
+                - let totalPrice = 0;
+                - let totalQuantity = 0;
+                each product in productsResponse
+                    - let productTotalPrice = (product.productAmountFinal || product.productPrice) * product.productQuantity;
+                    - totalPrice += productTotalPrice;
+                    - totalQuantity += product.productQuantity;
+
+                p.cart-summary-total Total: $ #{totalPrice.toFixed(2)}
+                p.cart-summary-quantity Cantidad total: #{totalQuantity}
+
+                button.cart-summary-button(type="button", id="btnBuyCart") Completar compra
+                button.cart-summary-button-clean(type="button", id="btnCleanCart") Limpiar carrito
 
     include ../footer.pug
 
