@@ -1,7 +1,9 @@
 const globalConstants = require('../const/globalConst');
-
+const { getProducts, findAllCategories } = require('../services/productService');
+const { createCarts, createDataCart } = require('../services/cartService');
 const port = globalConstants.PORT;
 const applicationName = globalConstants.APPLICATION_NAME;
+const traslate = require('../utils/traslate');
 
 async function getAll (req, res){
     try {
@@ -26,15 +28,23 @@ async function getAll (req, res){
 
 async function createCart (req, res){
     try {
+        let productsResponse;
+        let categoriesResponse;
+
         console.log("Inicio de creacion del carrito...");
         const cartRerquest = req.body;
-        
-        let productCartResponse =  JSON.parse(encodedProductsForCart);
+        console.log("cartRerquest-> ", cartRerquest);
 
-        console.log("productCartResponse-> ", productCartResponse);
+        const cart = createDataCart(cartRerquest);
+        createCarts(cart);
 
-        res.render('cart/cart', {
-            productsResponse: productCartResponse,
+        productsResponse = await getProducts();
+        productsResponse = await traslate.translateAllProducts(productsResponse);
+        categoriesResponse = await findAllCategories(); 
+
+        res.render('products/products', { 
+            productsResponse , 
+            categoriesResponse,
             port,
             applicationName
         });

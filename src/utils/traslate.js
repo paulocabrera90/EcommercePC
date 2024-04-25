@@ -1,7 +1,6 @@
 const translate = require('node-google-translate-skidz');
 const LANGUAGE = 'es';
 
-
 async function translateAllProducts(products) {
     const translateProducts = [];
     await Promise.all(products.map( async prod => {

@@ -19,7 +19,7 @@ async function findAll(req, res) {
         }
 
         if(!categoriesResponse) { 
-            await findAllCategories(); 
+            categoriesResponse = await findAllCategories(); 
         }
 
         console.log("ProductsResponse por renderizar: ", JSON.stringify(productsResponse).substring(0, 50));             

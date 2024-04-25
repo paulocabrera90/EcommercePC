@@ -1,6 +1,7 @@
 const CART = '/cart';
 const btnCleanCart = document.getElementById('btnCleanCart');
 const openCartButton = document.getElementById('openCart');
+const btnBuyCart = document.getElementById('btnBuyCart');
 
 document.getElementById('openCart').addEventListener('click', function() {
 
@@ -62,4 +63,27 @@ btnDeleteProduct.forEach(button => {
             window.location.href = url;
         });
     
+});
+
+btnBuyCart.addEventListener('click', () => {
+    const responseCart = JSON.parse(localStorage.getItem('productsForCart'));
+    window.location.href = 'http://localhost:4200/api/products';
+    fetch('http://localhost:4200/api/cart/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(responseCart)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al completar la compra: ' + response.statusText);
+        }
+        alert('Compra completada con éxito');
+        return response.json();
+    })
+    .catch(error => {
+        console.error('Error al completar la compra:', error);
+        alert('Se produjo un error al completar la compra');
+    });
 });
