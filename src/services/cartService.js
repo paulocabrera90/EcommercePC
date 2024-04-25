@@ -1,26 +1,29 @@
 const globalConstants = require('../const/globalConst');
-const { saveJSON, existJSON, readJSON } = require('../db/dbPersistence');
+const fs = require('fs');
+const { saveCartJSON, existJSON, readJSON } = require('../db/dbPersistence');
 const traslate = require('../utils/traslate');
 const currentDate = new Date().toISOString().split('T')[0];
 
 async function createCarts(data) {
-    console.log("Create carts");
+    console.log("Create carts", data);
     const filePath = 'src/db/carts.json';
     return existOrCreate(filePath, data);
 }
 
 async function createDataCart(dataCartRequest) {
-
+    console.log("Iniciando la creacion del archivo, con el CART");
+    console.log("DataCartRequest",dataCartRequest);
     let dataFinalCart = [];
 
     dataCartRequest.forEach(product => {
-        const productData = {
+        const productData = { 
             productId: product.productId,
             productTitle: product.productTitle,
             productPrice: product.productPrice,
             productAmountFinal: product.productAmountFinal,
             productQuantity: product.productQuantity
         }
+        console.log("Creando el productData",productData);
         dataFinalCart.push(productData);
     });   
 
@@ -39,31 +42,38 @@ async function createDataCart(dataCartRequest) {
         date: currentDate
     };
 
-    const finalDataCartArray = [cart]
-    console.log("finalDataCartArray", finalDataCartArray);
-    return finalDataCartArray;
+    const finalDataCartArray = cart
+    console.log("finalDataCartArray", JSON.stringify(finalDataCartArray));
+    return JSON.stringify(finalDataCartArray);
 }
 
 async function existOrCreate(filePath, dataRequest) {
     try { 
         let response;
         let flagExistJSON = await existJSON(filePath);
-        
+        console.log('FilePath', filePath);
+        console.log('DataRequest pre guardado', dataRequest);
+
         if (!flagExistJSON) {
             console.log("No existe el json. Se va a crear en la ruta: ", filePath);
 
-            response = await saveJSON(dataRequest, filePath);
+            const arrayCart = [JSON.parse(dataRequest)];
+            response = await saveCartJSON(JSON.stringify(arrayCart), filePath);
 
             console.log('JSON guardado correctamente. Service', JSON.stringify(response).substring(0,50));
 
         } else {
+            const path = '../db/carts.json';
+            console.log('Leyendo archivo carts.json');
+            const existingData = await readJSON(filePath);
+            console.log('---> Archivo leido es: ', existingData);
+            console.log('---> Cart a insertar: ', dataRequest);
+            
+            const parseDataJson = JSON.parse(dataRequest);
+            existingData.push(parseDataJson);
 
-            console.log('Leyendo archivo products.json');
-            const data = await readJSON(filePath);
-
-            console.log('Datos del archivo JSON:', JSON.stringify(data).substring(0, 20));
-
-            response = data;
+            console.log('---> Carts final: ',existingData);
+            response = await saveCartJSON(JSON.stringify(existingData), filePath);
         }
         return response;
 

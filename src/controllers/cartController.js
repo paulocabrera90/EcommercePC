@@ -35,7 +35,8 @@ async function createCart (req, res){
         const cartRerquest = req.body;
         console.log("cartRerquest-> ", cartRerquest);
 
-        const cart = createDataCart(cartRerquest);
+        const cart = await createDataCart(cartRerquest);
+        console.log("Objeto cart final para guardar en json-> ", cart);
         createCarts(cart);
 
         productsResponse = await getProducts();

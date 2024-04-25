@@ -11,6 +11,18 @@ async function saveJSON(jsonData, filePath) {
   }
 }
 
+async function saveCartJSON(jsonData, filePath) {
+  try {
+      console.log('saveCartJSON');      
+      await fs.promises.writeFile(filePath, jsonData);
+      console.log('Archivo guardado exitosamente');
+      return jsonData;
+  } catch (err) {
+      console.error('Error al guardar el archivo:', err);
+      throw err;
+  }
+}
+
 async function readJSON(filePath) {
   try {
       const data = await fs.promises.readFile(filePath, 'utf8');
@@ -41,5 +53,6 @@ async function existJSON(filePath) {
 module.exports = { 
   saveJSON,
   existJSON,
-  readJSON
+  readJSON,
+  saveCartJSON
 }

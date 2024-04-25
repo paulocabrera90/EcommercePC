@@ -67,8 +67,9 @@ btnDeleteProduct.forEach(button => {
 
 btnBuyCart.addEventListener('click', () => {
     const responseCart = JSON.parse(localStorage.getItem('productsForCart'));
-    window.location.href = 'http://localhost:4200/api/products';
-    fetch('http://localhost:4200/api/cart/create', {
+    window.location.href = `${URI}${PRODUCTS}`;
+
+    fetch(`${URI}${CART}`+'/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -79,6 +80,7 @@ btnBuyCart.addEventListener('click', () => {
         if (!response.ok) {
             throw new Error('Error al completar la compra: ' + response.statusText);
         }
+        localStorage.clear();
         alert('Compra completada con éxito');
         return response.json();
     })
