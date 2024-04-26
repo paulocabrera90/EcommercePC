@@ -31,14 +31,15 @@ async function createDataCart(dataCartRequest) {
     let totalAmount = 0;
     dataFinalCart.forEach(product => {
         totalQuantity += product.productQuantity;
-        totalAmount += product.productAmountFinal;
+        totalAmount += product.productAmountFinal || product.productPrice;
     });
+    const finalAmount = totalQuantity*totalAmount;
 
     const cart = {
         cartId: Date.now(), // Generar un ID único para el carrito
         product: dataFinalCart,
         quantity: totalQuantity,
-        amount: totalAmount.toFixed(2),
+        amount: finalAmount.toFixed(2),
         date: currentDate
     };
 

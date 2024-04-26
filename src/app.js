@@ -29,7 +29,7 @@ function init ()  {
     configurationRoute(app);
 
     app.listen(globalConstants.PORT)
-    console.log('Probando la api de ecommerve http://localhost:' + globalConstants.PORT +"/" + globalConstants.APPLICATION_NAME + "/products")
+    console.log('Probando la api de ecommerce http://localhost:' + globalConstants.PORT)
    
 }
 

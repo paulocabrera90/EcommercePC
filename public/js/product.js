@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             countBtnCart(btnCartCount);
             spinnerQuantity.forEach(spinner => { 
                 spinner.value = 1;
+                cantidadProductos = 1;
             });
             
         });
