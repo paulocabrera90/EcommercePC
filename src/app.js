@@ -3,6 +3,7 @@ const cors = require('cors');
 
 const globalConstants = require('./const/globalConst')
 const routerConfig = require('./routes/index.routes')
+const { goIndex } = require('./controllers/indexController')
 const join = globalConstants.JOIN;
 const dirname = globalConstants.DIRNAME;
 
@@ -17,7 +18,8 @@ const configurationApi = (app) => {
 }
 
 const configurationRoute = (app) => {
-    app.use('/api',routerConfig.routes_init())
+    app.use('/api',routerConfig.routes_init());
+    app.use('/',routerConfig.routes_init());
 }
 
 function init ()  {

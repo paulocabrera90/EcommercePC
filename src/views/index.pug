@@ -1,0 +1,25 @@
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Ecommerce PC
+    link(rel="stylesheet", href="/styles/indexStyle.css")
+    link(rel="stylesheet", href="/styles/navStyle.css")
+    link(rel="stylesheet", href="/styles/footerStyle.css")
+
+  body
+
+    include nav.pug
+        
+    .container
+        h1#welcome-message Bienvenido a nuestra página de compras
+        p#welcome-description En esta página encontrarás una amplia selección de productos para satisfacer tus necesidades de compra.
+
+        a#shop-button(href="/api/products")
+            img(src="/img/comprar.jpg", alt="Ir de compras")
+
+    include footer.pug
+   
+    script(src="/js/commons.js")
+    script(src="/js/cart.js")
+    script(src="/js/product.js")

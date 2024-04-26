@@ -55,3 +55,7 @@
     position: absolute;
     color: black;
   }
+
+  .logo {
+    height: 65px;
+  }

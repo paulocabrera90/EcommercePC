@@ -1,0 +1,29 @@
+body {
+    background-color: aquamarine;
+}
+
+.container {
+    text-align: center;
+}
+
+h1#welcome-message {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+p#welcome-description {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+#shop-button img {
+    height: auto;
+    margin: 12px;
+    border-radius: 6%;
+    transition: filter 0.3s, box-shadow 0.3s; 
+}
+
+#shop-button img:hover {
+    filter: brightness(0.8);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}

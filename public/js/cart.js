@@ -75,17 +75,33 @@ btnBuyCart.addEventListener('click', () => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(responseCart)
-    })
-    .then(response => {
+    }).then(response => {
         if (!response.ok) {
             throw new Error('Error al completar la compra: ' + response.statusText);
         }
         localStorage.clear();
-        alert('Compra completada con éxito');
+        alert('Compra completada con éxito1');
         return response.json();
+    })
+    .then(data => {
+        console.log('Datos devueltos por el servidor:', data);
+        alert('Compra completada con éxito2');
+        
     })
     .catch(error => {
         console.error('Error al completar la compra:', error);
         alert('Se produjo un error al completar la compra');
     });
+    // .then(response => {
+    //     if (!response.ok) {
+    //         throw new Error('Error al completar la compra: ' + response.statusText);
+    //     }
+    //     localStorage.clear();
+    //     alert('Compra completada con éxito');
+    //     return response.json();
+    // })
+    // .catch(error => {
+    //     console.error('Error al completar la compra:', error);
+    //     alert('Se produjo un error al completar la compra');
+    // });
 });

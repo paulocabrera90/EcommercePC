@@ -50,6 +50,8 @@ async function createCart (req, res){
             applicationName
         });
 
+        
+
     } catch (error) {
         console.error("/GET Error al obtener carrito: ", error);
         res.status(500).send("Error al obtener carrito");

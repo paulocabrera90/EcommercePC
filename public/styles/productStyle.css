@@ -12,7 +12,7 @@ body {
   box-sizing: border-box;
   height: 55%;
   display: flex;
-  background-color: #333;
+  background-color: #858383;
 }
 
 .product-container {
@@ -121,4 +121,28 @@ body {
 
 .alert-message {
   margin-bottom: 5px;
+}
+
+.categories-container {
+  margin-bottom: 20px;
+}
+
+.categories-container form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+label {
+  font-weight: bold;
+}
+
+select {
+  padding: 8px;
+  font-size: 16px;
+}
+
+option {
+  font-size: 16px;
 }
